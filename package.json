@@ -1,11 +1,11 @@
 {
   "name": "emoji-king",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "👑 World's most advanced emoji parser. All other parsers can bow down. 🙇",
   "main": "index.js",
   "scripts": {
-    "prepublish": "rm -rf dist && mkdir dist && npm run dist",
-    "dist": "./node_modules/.bin/babel-node ./generate.js > dist/emoji-map.js && cp src/index.js dist"
+    "prepublish": "rm -rf lib && mkdir lib && npm run generate",
+    "generate": "./node_modules/.bin/babel-node ./generate.js > lib/emoji-map.js"
   },
   "author": "emojikingjs@gmail.com",
   "license": "MIT",

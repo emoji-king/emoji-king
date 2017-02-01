@@ -1,9 +1,24 @@
-const emojimap = require('./emoji-map')
+const emojimap = require('../lib/emoji-map')
 
-function parse(s, counts) {
+function getFullyQualified(emoji) {
+  let m = emojimap
+  let fq
+  while (emoji && (m = m[emoji.charCodeAt(0)])) {
+    if (m.fq) {
+      fq = m.fq
+    }
+
+    emoji = emoji.slice(1)
+  }
+
+  return fq
+}
+
+function count(s, opts) {
+
+  if (!opts) opts = {}
 
   function recurse(m, s) {
-    let x = s
     if (s && (m = m[s.charCodeAt(0)])) {
       s = s.slice(1)
       const emoji = recurse(m, s)
@@ -13,12 +28,16 @@ function parse(s, counts) {
     return undefined
   }
 
-  if (counts == undefined) counts = {}
+  let counts = opts.counts || {}
 
   while(s && s.length > 0) {
     const emoji = recurse(emojimap, s)
     if (emoji) {
-      counts[emoji] = (counts[emoji] || 0) + 1
+      let e = emoji
+      if (opts.fullyQualified) {
+        e = getFullyQualified(emoji)
+      }
+      counts[e] = (counts[e] || 0) + 1
     }
     s = s.slice((emoji || "1").length)
   }
@@ -27,5 +46,5 @@ function parse(s, counts) {
 }
 
 module.exports = {
-  parse
+  count
 }
