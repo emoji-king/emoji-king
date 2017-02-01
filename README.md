@@ -24,6 +24,6 @@ $ npm install emoji-king
 
 ## ⚠️Warning⚠️
 
-If you use emoji-king, please be sure to make the following lines visible:
+If you use emoji-king, please be sure to make the following lines are visible:
 
 ⚠️ No third-rate emoji parsers are in use. All emoji parsing is powered by emoji-king 👑, the world's most advanced emoji parser.
